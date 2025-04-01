@@ -1,8 +1,11 @@
 package ovh.fedox.flocksystem.command.maintenance;
 
 
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import org.mineacademy.bfo.Common;
 import org.mineacademy.bfo.command.SimpleCommandGroup;
 import org.mineacademy.bfo.command.SimpleSubCommand;
+import org.mineacademy.bfo.remain.Remain;
 import ovh.fedox.flocksystem.FlockSystem;
 import ovh.fedox.flocksystem.model.MaintenanceSetting;
 import ovh.fedox.flocksystem.repository.MaintenanceRepository;
@@ -37,6 +40,14 @@ public final class MaintenanceToggleCommand extends SimpleSubCommand {
 		boolean maintenanceMode = maintenanceSetting.isMaintenanceMode();
 		maintenanceSetting.setMaintenanceMode(!maintenanceMode);
 		maintenanceRepository.save(maintenanceSetting);
+
+		for (ProxiedPlayer proxiedPlayer : Remain.getOnlinePlayers()) {
+			if (!proxiedPlayer.hasPermission("flocki.team")) {
+				if (maintenanceMode) {
+					proxiedPlayer.disconnect(Common.colorize("&4Wartungsmodus aktiviert."));
+				}
+			}
+		}
 
 		tellSuccess("Wartungsmodus erfolgreich " + (maintenanceMode ? "deaktiviert" : "aktiviert"));
 		SoundUtil.playSound(getPlayer(), SoundUtil.SoundType.SUCCESS);
