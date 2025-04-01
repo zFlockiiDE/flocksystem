@@ -6,6 +6,7 @@ import net.md_5.bungee.api.plugin.Listener;
 import org.mineacademy.bfo.Common;
 import org.mineacademy.bfo.plugin.SimplePlugin;
 import ovh.fedox.flocksystem.database.MongoDBManager;
+import ovh.fedox.flocksystem.database.RedisManager;
 import ovh.fedox.flocksystem.settings.Settings;
 
 /**
@@ -21,6 +22,9 @@ public final class FlockSystem extends SimplePlugin implements Listener {
 	@Getter
 	public static MongoDBManager mongoManager;
 
+	@Getter
+	public static RedisManager redisManager;
+
 	@Override
 	protected void onReloadablesStart() {
 		Common.setTellPrefix("&8&l➽ &a&lFlockSystem &8&l•&7 ");
@@ -29,6 +33,9 @@ public final class FlockSystem extends SimplePlugin implements Listener {
 		String database = Settings.MongoDB.MONGO_DATABASE;
 
 		mongoManager = new MongoDBManager(connectionString, database);
+
+		RedisManager.connect();
+		RedisManager.getJedis().keys("players:*").forEach(RedisManager.getJedis()::del);
 	}
 
 	@Override
@@ -36,4 +43,9 @@ public final class FlockSystem extends SimplePlugin implements Listener {
 		Common.setTellPrefix("&8&l➽ &a&lFlockSystem &8&l•&7 ");
 	}
 
+	@Override
+	protected void onPluginStop() {
+		mongoManager.close();
+		RedisManager.close();
+	}
 }

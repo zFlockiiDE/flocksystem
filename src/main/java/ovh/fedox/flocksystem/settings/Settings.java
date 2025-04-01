@@ -37,6 +37,22 @@ public final class Settings extends SimpleSettings {
 		}
 	}
 
+	public static class Redis {
+		public static String REDIS_HOST;
+		public static String REDIS_PORT;
+		public static String REDIS_USER;
+		public static String REDIS_PASSWORD;
+
+		private static void init() {
+			setPathPrefix("Redis");
+
+			REDIS_HOST = getString("Host");
+			REDIS_PORT = getString("Port");
+			REDIS_USER = getString("User");
+			REDIS_PASSWORD = getString("Password");
+		}
+	}
+
 	public static class Tablist {
 		public static List<String> HEADER;
 		public static List<String> FOOTER;
