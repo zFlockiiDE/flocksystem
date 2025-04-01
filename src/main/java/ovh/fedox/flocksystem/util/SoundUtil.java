@@ -31,7 +31,7 @@ public class SoundUtil {
 				protocolizePlayer.playSound(Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 1.0f, 0.4f);
 				break;
 			case FAILURE:
-				protocolizePlayer.playSound(Sound.ENTITY_IRON_GOLEM_HURT, SoundCategory.MASTER, 1.0f, 0.4f);
+				protocolizePlayer.playSound(Sound.ENTITY_IRON_GOLEM_HURT, SoundCategory.MASTER, 1.0f, 1f);
 				break;
 			case INFO:
 				protocolizePlayer.playSound(Sound.BLOCK_NOTE_BLOCK_BELL, SoundCategory.MASTER, 1.0f, 0.4f);
