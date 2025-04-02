@@ -4,6 +4,7 @@ package ovh.fedox.flocksystem.listener;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.ServerConnectEvent;
+import net.md_5.bungee.api.event.ServerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.mineacademy.bfo.annotation.AutoRegister;
@@ -26,6 +27,15 @@ public final class ServerListener implements Listener {
 
 	@EventHandler
 	public void onServerConnect(ServerConnectEvent event) {
+		refreshTablist(event.getPlayer());
+	}
+
+	@EventHandler
+	public void onServerDisconnect(ServerDisconnectEvent event) {
+		refreshTablist(event.getPlayer());
+	}
+
+	private void refreshTablist(ProxiedPlayer player) {
 		StringBuilder header = new StringBuilder();
 		StringBuilder footer = new StringBuilder();
 
@@ -43,11 +53,13 @@ public final class ServerListener implements Listener {
 		String formattedHeader = header.toString().replaceAll("%online%", FlockSystem.getInstance().getProxy().getOnlineCount() + "");
 		String formattedFooter = footer.toString().replaceAll("%online%", FlockSystem.getInstance().getProxy().getOnlineCount() + "");
 
-		for (ProxiedPlayer player : Remain.getOnlinePlayers()) {
-			player.setTabHeader(TextComponent.fromLegacy(ColorUtil.format(formattedHeader)), TextComponent.fromLegacy(ColorUtil.format(formattedFooter)));
+		for (ProxiedPlayer proxiedPlayer : Remain.getOnlinePlayers()) {
+			proxiedPlayer.setTabHeader(TextComponent.fromLegacy(ColorUtil.format(formattedHeader)), TextComponent.fromLegacy(ColorUtil.format(formattedFooter)));
 		}
 
-		event.getPlayer().setTabHeader(TextComponent.fromLegacy(ColorUtil.format(formattedHeader)), TextComponent.fromLegacy(ColorUtil.format(formattedFooter)));
+		if (player != null) {
+			player.setTabHeader(TextComponent.fromLegacy(ColorUtil.format(formattedHeader)), TextComponent.fromLegacy(ColorUtil.format(formattedFooter)));
+		}
 	}
 
 }
