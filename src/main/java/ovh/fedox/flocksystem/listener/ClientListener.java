@@ -1,6 +1,7 @@
 package ovh.fedox.flocksystem.listener;
 
 
+import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
@@ -8,8 +9,8 @@ import net.md_5.bungee.event.EventHandler;
 import org.mineacademy.bfo.Common;
 import org.mineacademy.bfo.annotation.AutoRegister;
 import ovh.fedox.flocksystem.FlockSystem;
-import ovh.fedox.flocksystem.model.MaintenanceSetting;
-import ovh.fedox.flocksystem.repository.MaintenanceRepository;
+import ovh.fedox.flocksystem.database.model.MaintenanceSetting;
+import ovh.fedox.flocksystem.database.repository.MaintenanceRepository;
 
 import java.util.Optional;
 
@@ -41,6 +42,16 @@ public final class ClientListener implements Listener {
 					Common.tell(proxiedPlayer, "§7" + event.getPlayer().getName() + " §7hat versucht, den Server zu betreten, während der Wartungsmodus aktiviert ist.");
 				}
 			}
+		} else {
+			ServerInfo lobbyServer = FlockSystem.getInstance().getProxy().getServerInfo("lobby");
+
+			if (lobbyServer == null) {
+				Common.logFramed("Lobby server not found, disconnecting " + event.getPlayer().getName());
+				event.getPlayer().disconnect("§4Lobby-Server nicht gefunden");
+				return;
+			}
+
+			event.getPlayer().connect(lobbyServer);
 		}
 
 	}

@@ -1,9 +1,9 @@
-package ovh.fedox.flocksystem.repository;
+package ovh.fedox.flocksystem.database.repository;
 
 
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-import ovh.fedox.flocksystem.model.MaintenanceSetting;
+import ovh.fedox.flocksystem.database.model.MaintenanceSetting;
 
 import java.util.Optional;
 

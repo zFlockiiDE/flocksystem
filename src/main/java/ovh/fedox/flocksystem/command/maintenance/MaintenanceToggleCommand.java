@@ -7,8 +7,8 @@ import org.mineacademy.bfo.command.SimpleCommandGroup;
 import org.mineacademy.bfo.command.SimpleSubCommand;
 import org.mineacademy.bfo.remain.Remain;
 import ovh.fedox.flocksystem.FlockSystem;
-import ovh.fedox.flocksystem.model.MaintenanceSetting;
-import ovh.fedox.flocksystem.repository.MaintenanceRepository;
+import ovh.fedox.flocksystem.database.model.MaintenanceSetting;
+import ovh.fedox.flocksystem.database.repository.MaintenanceRepository;
 import ovh.fedox.flocksystem.util.SoundUtil;
 
 import java.util.Optional;

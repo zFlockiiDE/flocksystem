@@ -8,7 +8,7 @@ import com.mongodb.client.MongoDatabase;
 import lombok.Getter;
 import org.bson.Document;
 import org.mineacademy.bfo.Common;
-import ovh.fedox.flocksystem.repository.MaintenanceRepository;
+import ovh.fedox.flocksystem.database.repository.MaintenanceRepository;
 
 /**
  * MongoDBManager.java - The manager for handling database connections

@@ -9,8 +9,8 @@ import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 import org.mineacademy.bfo.annotation.AutoRegister;
 import ovh.fedox.flocksystem.FlockSystem;
-import ovh.fedox.flocksystem.model.MaintenanceSetting;
-import ovh.fedox.flocksystem.repository.MaintenanceRepository;
+import ovh.fedox.flocksystem.database.model.MaintenanceSetting;
+import ovh.fedox.flocksystem.database.repository.MaintenanceRepository;
 import ovh.fedox.flocksystem.settings.Settings;
 
 import java.util.Optional;

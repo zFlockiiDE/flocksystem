@@ -1,4 +1,4 @@
-package ovh.fedox.flocksystem.model;
+package ovh.fedox.flocksystem.database.model;
 
 
 import org.bson.Document;
